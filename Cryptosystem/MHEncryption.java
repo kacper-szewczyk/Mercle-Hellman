@@ -14,7 +14,7 @@ public class MHEncryption
 
 	}
 	ArrayList<BigInteger> publicKey;
-	long keyLength;
+	private long keyLength;
 	
 	public BigInteger encryptMessage(String plainText)
 	{

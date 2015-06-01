@@ -11,13 +11,15 @@ public class MHGenerator {
 		publicKey=new ArrayList<BigInteger>();
 		this.q=BigInteger.ZERO;
 		this.r=BigInteger.ZERO;
+		this.sumOfElements = BigInteger.ZERO;
 	}
 
 	ArrayList<BigInteger> publicKey;
-	ArrayList<BigInteger> privateKey;
-	long keyLength;
-	BigInteger q;
-	BigInteger r;	
+	private ArrayList<BigInteger> privateKey;
+	private long keyLength;
+	private BigInteger q;
+	private BigInteger r;	
+	private BigInteger sumOfElements;
 	
 	public void generateKey()
 	{
@@ -27,20 +29,23 @@ public class MHGenerator {
 		number = Math.abs(number);
 		BigInteger elem = new BigInteger(number.toString());
 		superIncreasing.add(elem);
+		sumOfElements = sumOfElements.add(elem);
 		for(int i=1;i<keyLength;i++)
 		{
 			number = randomNumber.nextLong()%10;
 			number = Math.abs(number);
 			BigInteger elem2 = new BigInteger(number.toString());
-			BigInteger elem3 = elem.add(elem.add(elem2));
+			BigInteger elem3 = sumOfElements.add(elem2);
 			superIncreasing.add(elem3);
 			elem = elem3;
+			sumOfElements = sumOfElements.add(elem);
+			//System.out.println(elem);
 		}
 		privateKey=superIncreasing;
 		number=randomNumber.nextLong();
 		number = Math.abs(number);
 		q = new BigInteger(number.toString());
-		q = q.add(elem.add(elem));
+		q = q.add(sumOfElements);
 		number = (long) 3;
 		r = new BigInteger(number.toString());
 		while(!(r.gcd(q).equals(BigInteger.ONE)))

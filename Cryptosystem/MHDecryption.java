@@ -17,10 +17,10 @@ public class MHDecryption {
 		this.q=q;
 		this.r=r;
 	}
-	long keyLength;
-	BigInteger q;
-	BigInteger r;
-	ArrayList<BigInteger> privateKey;
+	private long keyLength;
+	private BigInteger q;
+	private BigInteger r;
+	private ArrayList<BigInteger> privateKey;
 	
 	public String decryptMessage(BigInteger cipherText)
 	{
@@ -41,7 +41,6 @@ public class MHDecryption {
 			}
 			if(i%8==0)
 			{
-				//System.out.println(plainElem[j]);
 				j--;
 			}
 		}
